@@ -1,12 +1,27 @@
-const { copyRecursiveSync, questionAsync, l } = require('./../functions')
+const {copyRecursiveSync, questionAsync, l} = require('./../functions')
 const path = require('path')
 const fs = require('fs')
 const makeDir = require('make-dir');
-const { exec } = require("child_process");
+const {exec} = require("child_process");
 
 const os = require("os");
+const v = require("voca");
+const moment = require("moment");
 
-module.exports = async function ({ name }) {
+function makeid(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
+    }
+    return result;
+}
+
+
+module.exports = async function ({name}) {
     l('Welcome we gonna make another template... \t')
 
     const userHomeDir = os.homedir();
@@ -20,15 +35,17 @@ module.exports = async function ({ name }) {
         return
     }
 
-    let configJson = fs.readFileSync(configFile, { encoding: 'utf8', flag: 'r' })
+    let configJson = fs.readFileSync(configFile, {encoding: 'utf8', flag: 'r'})
     configJson = JSON.parse(configJson)
 
 
     if (!name) {
-        name = questionAsync('give me the template name: ')
+        name = questionAsync('Give me the template name: ')
     } else {
         name = name[0]
     }
+
+    name = v.snakeCase(name)
 
     let dir = path.resolve(configJson.template_folder, name)
 
@@ -51,12 +68,9 @@ module.exports = async function ({ name }) {
 
 
     let functionsFile = `
-    const { questionAsync } = require('plantilla/functions')
+    
     module.exports = {
-        createField = async function(field,type){
-            let value = questionAsync('Give me a value')
-            return "{name:field, type:type, value:value}"
-        },
+     {{functions_list}}
     }; `
 
     configJson.functions_file = 'functions.js'
@@ -68,14 +82,15 @@ module.exports = async function ({ name }) {
 
     makeDir(path.resolve(dir, 'structure'))
 
+    let function_list = ''
 
     l(` ****************** Now we gonna define replacers **********************
-        Replacers help us to define fragments of text that will be replaced in our template.
+    
+        Replacers help us to define fragments of text that will be replaced in your template.
         There are some replacer types
-            * Text(t): Every you find this patern will be replace with a text pre confured in JSON config file
-            * Function(f): In every apparence will execute a function to fill or replace the match pattern, functions params must be configured as text or variables
-            * Recursive(r): Executes recursively a functon to fill and replace match pattern
-            * Varaible(v): Request for value from user using terminal
+            * Function(f): In every appearance will call function to fill space
+            * Varaible(v): Only replace a text with other
+            * File Names(n):Replace text in  files
         a replacer could be 
             Global: Only will be requested once at start running template or
             Local: Will be requested in every appareance     
@@ -88,54 +103,85 @@ module.exports = async function ({ name }) {
             configJson.replacer = []
         }
         let inner = {}
-        let rpl_name = questionAsync('Give me the match name you must not include brackets {{ }} or {$ $} or any other: ')
-        inner.name = rpl_name
-        let rpl_type = questionAsync('Replacer match is text(t), function(f), Recursive(r) , Variable(v) *default text: ')
 
-        if (rpl_type !== 't' && rpl_type !== 'f' && rpl_type !== 'r' && rpl_type !== 'v') {
-            rpl_type = 't'
+        let rpl_type = questionAsync('Replacer match is function(f), Variable(v), File Name(n) (Default:v): ')
+
+        if (rpl_type !== 'n' && rpl_type !== 'f' && rpl_type !== 'v') {
+            rpl_type = 'v'
         }
-
         inner.type = rpl_type
-        if (inner.type == 't') {
-            let rpl_value = questionAsync('Give me the replacer text : ')
-            inner.value = rpl_value
+
+        if (inner.type.toLowerCase() == 'f') {
+            let rpl_name = questionAsync('Give me the name for function: ')
+            if (rpl_name) {
+                inner.name = rpl_name
+            } else {
+                inner.name = 'function_' + makeid(5)
+            }
+            let rpl_comma = questionAsync('Give me the parameters for function, comma separated (Example: name,description,field1): ')
+            inner.params = rpl_comma?.split(',') || []
+
+            function_list = function_list + ` ${inner.name} : async function (${inner?.params?.join(',')}){ \n\n//** Important the return must be a string fragment of template \nreturn '' \n }, `
         }
 
-        if (inner.type == 'f', inner.type == 'r') {
-            let rpl_comma = questionAsync('Give me the parameter(must be text, or variables)  names for functions, comma separed : ')
-            inner.params = rpl_comma.split(',')
-        }
+        if (inner.type.toLowerCase() == 'v') {
+            let rpl_name = questionAsync('Give me the name for variable: ')
+            if (rpl_name) {
+                inner.name = rpl_name
+            } else {
+                inner.name = 'variable_' + makeid(7)
+            }
 
-        if (inner.type == 'v') {
-            let rpl_ask = questionAsync('Give me the replacer request variable question ex: Wich is the value for(' + inner.name + ')? : ')
+            let rpl_ask = questionAsync('Give me the replacer request variable question (Default: Which is the value for ' + inner.name + '?): ')
             inner.ask = rpl_ask
-            if (!rpl_ask) {
-                inner.ask = 'Wich is the value for ' + inner.name + '?'
+            if (!rpl_ask || rpl_ask.trim().toLowerCase() == 'y') {
+                inner.ask = 'Which is the value for ' + inner.name + '?'
             }
 
-            let rpl_typeof = questionAsync('Give me the replacer request variable typeof (object): ')
+            let rpl_typeof = questionAsync('What kind of datatype is the variable string,number,date,boolean,array,object (Default: string): ')
             inner.typeof = rpl_typeof
-            if (!rpl_typeof) {
-                inner.typeof = 'object'
+            if (!rpl_typeof || rpl_typeof.toLowerCase() == 'y') {
+                inner.typeof = 'string'
             }
+        }
+
+        if (inner.type.toLowerCase() == 'n') {
+            let rpl_name = questionAsync('Give me the name for file name variable: ')
+            if (rpl_name) {
+                inner.name = rpl_name
+            } else {
+                inner.name = 'fileName_' + makeid(11)
+            }
+
+            let rpl_ask = questionAsync('Give me the replacer request file name question (Default: Which is the value for ' + inner.name + '?): ')
+            inner.ask = rpl_ask
+            if (!rpl_ask || rpl_ask.trim().toLowerCase() == 'y') {
+                inner.ask = 'Which is the value for ' + inner.name + '?'
+            }
+
+
         }
 
         let rpl_global = questionAsync('Replacer is global (n)/y: ')
         inner.global = rpl_global.toLowerCase() == 'y' ? true : false
+
 
         configJson.replacer.push(inner)
         rpl = questionAsync('Do you want to add another replacer (N)/Y: ')
     }
 
 
-    let sh = questionAsync('Do you want to execute a bash comand at end: echo "End Proccess" ')
-    if (sh) {
+    let sh = questionAsync('Do you want to execute a bash command at end (Example: echo "End Process") ')
+    if (sh && sh.toLowerCase() != 'y') {
         configJson.cmd = sh
+    }else {
+        configJson.cmd = ''
     }
 
-    fs.writeFileSync(path.resolve(dir, 'functions.js'), functionsFile, null, '\t')
+    functionsFile = functionsFile.replaceAll('{{functions_list}}', function_list)
+
+    fs.writeFileSync(path.resolve(dir, 'functions.js'), functionsFile)
     fs.writeFileSync(path.resolve(dir, 'config.json'), JSON.stringify(configJson, null, '\t'))
 
-    l('\t template base created correctly \t')
+    l('\t Template ' + configJson.name + ' created correctly \t')
 }

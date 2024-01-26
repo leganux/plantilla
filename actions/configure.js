@@ -22,7 +22,7 @@ module.exports = async function ({ dir, login, files }) {
     let configJson = require('./../config.json')
 
     if (!dir) {
-        let dir_ = questionAsync('Wich directory save templates (' + fullpath + '):')
+        let dir_ = questionAsync('Wich directory save templates (Default:' + fullpath + '): ')
         if (!dir_) {
             dir = fullpath
         } else {

@@ -6,9 +6,9 @@
         "password": "pk_default"
     },
     "match": {
-        "text": "{{_X_}}",
+        "variable": "{{_X_}}",
         "function": "{$_X_$}",
-        "recursive": "{%_X_%}"
+        "files": "___X___"
     },
     "support_files": [
         "js",

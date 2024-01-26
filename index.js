@@ -38,7 +38,7 @@ program
 
     program
     .command('use')
-    .description('Download template from comunity to local folder')
+    .description('Download template from community to local folder')
     .option('-n, --name <name...>', 'The name for template')
     .action(use)
 
