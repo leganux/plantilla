@@ -1,13 +1,12 @@
 #! /usr/bin/env node
 
-const { program } = require('commander')
+const {program} = require('commander')
 
 const configure = require('./actions/configure')
 const execute = require('./actions/execute')
 const make = require('./actions/make')
 const publish = require('./actions/publish')
 const use = require('./actions/use')
-
 
 
 program
@@ -36,10 +35,15 @@ program
     .option('-n, --name <name...>', 'The name for template')
     .action(publish)
 
-    program
+program
     .command('use')
     .description('Download template from community to local folder')
     .option('-n, --name <name...>', 'The name for template')
+    .action(use)
+
+program
+    .command('list')
+    .description('List the available templates, and its description')
     .action(use)
 
 

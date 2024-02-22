@@ -1,0 +1,22 @@
+.content-header
+      .container-fluid
+        .row.mb-2
+          .col-sm-6
+            if title 
+              h1.m-0=title
+          .col-sm-6
+            if breadcrubs
+              ol.breadcrumb.float-sm-right
+                each val in breadcrubs
+                  if val.href
+                    if val.active 
+                      li.breadcrumb-item.active
+                        a(href=val.href)=val.title
+                    else 
+                      li.breadcrumb-item
+                        a(href=val.href)=val.title
+                  else
+                    if val.active
+                      li.breadcrumb-item.active=val.title 
+                    else 
+                      li.breadcrumb-item=val.title

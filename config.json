@@ -12,6 +12,7 @@
     },
     "support_files": [
         "js",
+        "json",
         "html",
         "pug",
         "ts",

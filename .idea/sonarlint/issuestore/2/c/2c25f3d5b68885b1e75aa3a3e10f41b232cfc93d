@@ -1,0 +1,12 @@
+
+|javascript:S3776 "TRefactor this function to reduce its Cognitive Complexity from 90 to the 15 allowed.(Ϋ·ηϊÿÿÿÿ8ήδΫλά1
+_javascript:S1481'"7Remove the declaration of the unused 'esLint' variable.(ΟΛÿÿÿÿÿ8ίδΫλά1
+\javascript:S1854'"4Remove this useless assignment to variable "esLint".(ΟΛÿÿÿÿÿ8ίδΫλά1
+‰javascript:S2703I"aAdd the "let", "const" or "var" keyword to this declaration of "description" to make it explicit.(β£’εόÿÿÿÿ8ίδΫλά1
+jjavascript:S6551…"A'ExResponse' will evaluate to '[object Object]' when stringified.(―ϋυόϋÿÿÿÿ8ίδΫλά1
+bjavascript:S6644«">Unnecessary use of boolean literals in conditional expression.(ψη€Σ8ίδΫλά1
+ajavascript:S6644°">Unnecessary use of boolean literals in conditional expression.(ΦβλZ8ίδΫλά1
+jjavascript:S6551φ"A'ExResponse' will evaluate to '[object Object]' when stringified.(―ϋυόϋÿÿÿÿ8ίδΫλά1
+bjavascript:S6644">Unnecessary use of boolean literals in conditional expression.(ψη€Σ8ίδΫλά1
+ajavascript:S6644">Unnecessary use of boolean literals in conditional expression.(ΦβλZ8ΰδΫλά1
+]javascript:S1135¥"4Complete the task associated to this "TODO" comment.(µυÿώÿÿÿÿ8ΰδΫλά1

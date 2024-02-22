@@ -1,18 +1,19 @@
-const { copyRecursiveSync, questionAsync, l } = require('./../functions')
+const {copyRecursiveSync, questionAsync, l} = require('./../functions')
 const path = require('path')
 const fs = require('fs')
 const makeDir = require('make-dir');
-const { exec } = require("child_process");
+const {exec} = require("child_process");
 
 const os = require("os");
 
-module.exports = async function ({ dir, login, files }) {
+module.exports = async function ({dir, login, files}) {
     l('Welcome now we gonna configure plantilla engine... \t')
 
     const userHomeDir = os.homedir();
 
     let fullpath = path.join(userHomeDir, 'plantilla')
     let configFile = path.join(userHomeDir, '.plantillajs', 'config.js')
+    let esLint = path.join(userHomeDir, '.plantillajs', '.eslintrc.js')
     let configFolder = path.join(userHomeDir, '.plantillajs')
 
     if (!fs.existsSync(configFolder)) {
@@ -34,7 +35,6 @@ module.exports = async function ({ dir, login, files }) {
     configJson.template_folder = dir
 
 
-
     if (files) {
         l('Adding files to accepted types... \t')
         files = files[0].split(',')
@@ -52,6 +52,37 @@ module.exports = async function ({ dir, login, files }) {
         l('User and password configured \t')
     }
 
+    let file_lint = ` 
+    module.exports = {
+  env: {
+    browser: true,
+    commonjs: true,
+    es2021: true
+  },
+  extends: 'standard',
+  overrides: [
+    {
+      env: {
+        node: true
+      },
+      files: [
+        '.eslintrc.{js,cjs}'
+      ],
+      parserOptions: {
+        sourceType: 'script'
+      }
+    }
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest'
+  },
+  rules: {
+  }
+}
+
+    `
+
     fs.writeFileSync(path.resolve(configFile), JSON.stringify(configJson, null, '\t'))
+    fs.writeFileSync(path.resolve(esLint), file_lint)
     l('\t Config file saved correctly \t')
 }

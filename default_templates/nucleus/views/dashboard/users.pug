@@ -1,0 +1,56 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title Nucleus  
+    if title 
+      | !{title}
+  include template/styles.pug
+
+.wrapper
+  // Preloader
+  .preloader.flex-column.justify-content-center.align-items-center
+    img.animation__wobble(src='/cdn/images/nucleus_simple.png' alt='nucleus logo' height='120' width='120')
+  // Navbar
+  include template/navbar.pug
+  // /.navbar
+  // Main Sidebar Container
+  include template/main_menu.pug
+
+  .content-wrapper
+    include template/breadcrubs.pug
+
+    section.content
+      .container-fluid
+
+        .row
+          .col-md-12
+            .card
+              .card-header
+                h5.card-title Users
+                .card-tools
+                  button.btn.btn-tool(type='button' data-card-widget='collapse')
+                    i.fas.fa-minus
+                  .btn-group
+                    button.btn.btn-tool.dropdown-toggle(type='button' data-toggle='dropdown')
+                      i.fas.fa-wrench
+                    .dropdown-menu.dropdown-menu-right(role='menu')
+                      a.dropdown-item(href='#') Action
+                      a.dropdown-item(href='#') Another action
+                      a.dropdown-item(href='#') Something else here
+                      a.dropdown-divider
+                      a.dropdown-item(href='#') Separated link
+                  button.btn.btn-tool(type='button' data-card-widget='remove')
+                    i.fas.fa-times
+              // /.card-header
+              .card-body
+                .row 
+                  .col-12 
+                    center 
+                      img(src="/cdn/images/nucleusfull.png" width="500px" alt="logo completo nucleus").img-fluid
+                .row 
+                  .col-12 
+                   
+
+  include template/footer.pug
+include template/scripts.pug

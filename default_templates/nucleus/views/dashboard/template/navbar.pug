@@ -1,0 +1,76 @@
+nav.main-header.navbar.navbar-expand.navbar-dark
+    // Left navbar links
+    ul.navbar-nav
+        li.nav-item
+            a.nav-link(data-widget='pushmenu' href='#' role='button')
+                i.fas.fa-bars
+        if (navbar)    
+            each val in navbar 
+                li.nav-item.d-none.d-sm-inline-block
+                    a.nav-link(href=val.href)=val.title
+
+    // Right navbar links
+    ul.navbar-nav.ml-auto
+        // Navbar Search
+        if (search)
+            li.nav-item
+                a.nav-link(data-widget='navbar-search' href='#' role='button')
+                    i.fas.fa-search
+                .navbar-search-block
+                    .form-inline
+                        .input-group.input-group-sm
+                            input(type='search' placeholder='Search' aria-label='Search' class="form-control form-control-navbar "+search.class_input )
+                            .input-group-append
+                                button(class=' btn btn-navbar '+ search.class_button)
+                                    i.fas.fa-search
+                                button.btn.btn-navbar(type='button' data-widget='navbar-search')
+                                    i.fas.fa-times
+        // Messages Dropdown Menu
+        if (messages && messages.messages)
+            li.nav-item.dropdown
+                a.nav-link(data-toggle='dropdown' href='#')
+                    i.far.fa-comments
+                    span.badge.badge-danger.navbar-badge=messages.total
+                .dropdown-menu.dropdown-menu-lg.dropdown-menu-right
+                    each val in messages.messages
+                        a(href=val.href value=val.id class='dropdown-item '+ messages.class )
+                            // Message Start
+                            .media
+                                img.img-size-50.mr-3.img-circle(src=val.avatar alt='User Avatar')
+                                .media-body
+                                    h3.dropdown-item-title
+                                        | !{val.name}
+                                        span.float-right.text-sm
+                                            i.fas.fa-star
+                                    p.text-sm=val.text 
+                                    p.text-sm.text-muted
+                                        i.far.fa-clock.mr-1
+                                        |  !{val.time}
+                            // Message End
+                        .dropdown-divider
+
+                    a.dropdown-item.dropdown-footer(href=messages.all_href) See All Messages
+        // Notifications Dropdown Menu
+        if (notifications && notifications.notifications)
+            li.nav-item.dropdown
+                a.nav-link(data-toggle='dropdown' href='#')
+                    i.far.fa-bell
+                    span.badge.badge-warning.navbar-badge=notifications.total
+                .dropdown-menu.dropdown-menu-lg.dropdown-menu-right
+                    span.dropdown-item.dropdown-header !{notifications.total} Notifications
+                    .dropdown-divider
+
+                    each val in notifications.notifications
+                        a.dropdown-item(href=val.href)
+                            i(class='mr-2 '+val.icon)
+                            |  !{val.text}
+                            span.float-right.text-muted.text-sm=val.time
+                        .dropdown-divider
+
+                    a.dropdown-item.dropdown-footer(href=notifications.all_href) See All Notifications
+        li.nav-item
+            a.nav-link(data-widget='fullscreen' href='#' role='button')
+                i.fas.fa-expand-arrows-alt
+        li.nav-item
+            a.nav-link(data-widget='control-sidebar' data-slide='true' href='#' role='button')
+                i.fas.fa-th-large
