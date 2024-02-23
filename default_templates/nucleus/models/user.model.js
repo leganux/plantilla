@@ -60,6 +60,11 @@ const userModel = new Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    custom: {
+        type: mongoose.Schema.Types.Mixed,
+        required: false,
+        default: false
     }
 
 }, {

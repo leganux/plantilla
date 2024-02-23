@@ -3,6 +3,9 @@ const router = express.Router()
 
 let assets = require('./../config/assets.config')
 let menu = require('./../config/menu.config')
+let datatbleHelper = require('./../helpers/datatable.helper')
+let userModel = require('./../models/user.model')
+let configModel = require('./../models/configuration.model')
 
 let baseUrl = '/cdn/dashboard/'
 
@@ -51,8 +54,12 @@ router.get('/demo', async function (req, res) {
 router.get('/users', async function (req, res) {
     let myAssets = new assets()
     myAssets = myAssets.getAssetsAdmin()
+    myAssets.scripts.push('/cdn/components/datatable.js')
+    let datatable = await datatbleHelper.dt_constructor({model: userModel, actions: 'Create,Update,read,delete'})
+    console.log(datatable)
     res.status(200).render('dashboard/users', {
-        ...myAssets, ...menu,
+        ...myAssets,
+        ...menu,
         title: 'Users',
         breadcrubs: [
             {
@@ -67,7 +74,11 @@ router.get('/users', async function (req, res) {
                 active: true
 
             }
-        ]
+        ],
+        datatable,
+        toJS: JSON.stringify({
+            datatable
+        })
 
     })
 })

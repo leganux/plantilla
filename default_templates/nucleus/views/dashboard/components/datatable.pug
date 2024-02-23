@@ -1,0 +1,18 @@
+if datatable
+    .row
+        .col-4
+        .col-4
+        .col-4
+            if datatable && datatable.actions && datatable.actions.create
+                button.btn.btn-block.btn-info(id="datatable_new_button_" + datatable.name) New !{datatable.name}
+    br
+    .row
+        .col-12
+            table.table.table-hover(id="datatable_" + datatable.name)
+                thead
+                    tr
+                        each val in datatable.columns
+                            th=val.name
+                tbody(id="datatable_body_" + datatable.name)
+
+
