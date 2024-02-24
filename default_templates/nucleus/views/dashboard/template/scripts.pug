@@ -15,5 +15,5 @@ if toJS
 
 if scripts
     each val in scripts
-        script(src=val)
+        script(src=val + '?v=' + (Math.ceil(Math.random() * 1000)))
 

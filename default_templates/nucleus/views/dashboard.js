@@ -3,7 +3,7 @@ const router = express.Router()
 
 let assets = require('./../config/assets.config')
 let menu = require('./../config/menu.config')
-let datatbleHelper = require('./../helpers/datatable.helper')
+let datatableHelper = require('./../helpers/datatable.helper')
 let userModel = require('./../models/user.model')
 let configModel = require('./../models/configuration.model')
 
@@ -29,9 +29,13 @@ router.get('/', async function (req, res) {
 })
 
 router.get('/demo', async function (req, res) {
+
     let myAssets = new assets()
     myAssets = myAssets.getAssetsAdmin()
+    /* custom assets**/
     myAssets.scripts.push(baseUrl + 'dist/js/demo.js')
+    myAssets.scripts.push(baseUrl + 'dist/js/pages/dashboard2.js')
+
     res.status(200).render('dashboard/demo', {
         ...myAssets, ...menu,
         title: 'Welcome',
@@ -54,9 +58,14 @@ router.get('/demo', async function (req, res) {
 router.get('/users', async function (req, res) {
     let myAssets = new assets()
     myAssets = myAssets.getAssetsAdmin()
+    /* custom assets**/
+    myAssets.scripts.push('/cdn/components/code-rag.sdk.js')
     myAssets.scripts.push('/cdn/components/datatable.js')
-    let datatable = await datatbleHelper.dt_constructor({model: userModel, actions: 'Create,Update,read,delete'})
+
+
+    let datatable = await datatableHelper.dt_constructor({model: userModel, actions: 'Create,Update,read,delete'})
     console.log(datatable)
+
     res.status(200).render('dashboard/users', {
         ...myAssets,
         ...menu,

@@ -44,7 +44,10 @@ module.exports = {
                         default: val.default ? val.default : null,
                         required: val.required ? val.required : false,
                         order,
-                        enum: val.enum ? val.enum : false
+                        enum: val.enum ? val.enum : false,
+                        customName: val.customName ? val.customName : false,
+                        isPassword: val.isPassword ? val.isPassword : false,
+                        isFile: val.isFile ? val.isFile : false,
                     })
                 } else {
                     if (val == 'ObjectId') {
@@ -75,7 +78,10 @@ module.exports = {
                         default: null,
                         required: false,
                         order,
-                        enum: false
+                        enum: false,
+                        customName: false,
+                        isPassword: false,
+                        isFile: false,
                     })
                 }
 

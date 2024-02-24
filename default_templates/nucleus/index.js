@@ -11,10 +11,10 @@ const morgan = require('morgan')
 const path = require('path')
 
 const http = require('http');
-const { log } = require('console');
+const {log} = require('console');
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors())
 
@@ -43,12 +43,12 @@ app.use('/', require('./views/site.js'))
 app.use('/dashboard', require('./views/dashboard.js'))
 
 
-
 //CREATE SERVER HTTP
 const server = http.createServer(app)
 
 server.listen(process.env.API_PORT | 1111, () => {
-    console.log('started at port', process.env.API_PORT | 1111);
+    console.log('started at');
+    console.log('http://localhost:' + (String(process.env.API_PORT) | '1111'));
 });
 
 /* Active this part to use  files storage
@@ -103,7 +103,6 @@ module.exports.uploadFileS3 = async function (filePath, dest) {
 
 }
 */
-
 
 
 //CREATE ONE ADMIN IF THERE AREN'T ADMINS

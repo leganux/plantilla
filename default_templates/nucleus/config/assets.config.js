@@ -26,7 +26,9 @@ module.exports = function () {
                 baseUrl + 'plugins/datatables-buttons/js/buttons.html5.min.js',
                 baseUrl + 'plugins/datatables-buttons/js/buttons.print.min.js',
                 baseUrl + 'plugins/datatables-buttons/js/buttons.colVis.min.js',
-                baseUrl + 'dist/js/pages/dashboard2.js',
+                baseUrl + 'plugins/moment/moment-with-locales.js',
+                baseUrl + 'plugins/sweetalert2/sweetalert2.all.js',
+
 
             ],
             styles: [
@@ -37,6 +39,8 @@ module.exports = function () {
                 baseUrl + 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css',
                 baseUrl + 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
                 baseUrl + 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css',
+
+                baseUrl + 'plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css',
 
                 baseUrl + 'dist/css/adminlte.min.css',
 

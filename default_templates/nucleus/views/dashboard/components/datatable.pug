@@ -1,18 +1,19 @@
 if datatable
     .row
-        .col-4
-        .col-4
-        .col-4
+        .col-3
+        .col-3
+        .col-3
+        .col-3
             if datatable && datatable.actions && datatable.actions.create
                 button.btn.btn-block.btn-info(id="datatable_new_button_" + datatable.name) New !{datatable.name}
     br
     .row
         .col-12
-            table.table.table-hover(id="datatable_" + datatable.name)
+            table.table.table-hover(style="width:100%" id="datatable_" + datatable.name)
                 thead
                     tr
                         each val in datatable.columns
-                            th=val.name
+                            th !{val.customName ? val.customName : val.name}
                 tbody(id="datatable_body_" + datatable.name)
 
 

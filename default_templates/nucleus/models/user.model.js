@@ -1,71 +1,80 @@
 const mongoose = require('mongoose')
 const moment = require('moment')
 
-const { Schema } = mongoose;
+const {Schema} = mongoose;
 
 const userModel = new Schema({
     password: {
         type: String,
-        required: false
+        required: false,
+        customName: 'Password',
+        isPassword: true
     },
 
     username: {
         type: String,
-        required: false,
-        default: ''
+        required: true,
+        default: '',
+        customName: 'Username',
     },
     type_user: {
         type: String,
         required: true,
         enum: ['admin', 'client'],
-        default: 'client'
+        default: 'client',
+        customName: 'Type of user',
     },
     name: {
         type: String,
         required: false,
-        default: ''
+        default: '',
+        customName: 'Name',
     },
     lastname: {
         type: String,
         required: false,
-        default: ''
+        default: '',
+        customName: 'Last name',
     },
     email: {
         type: String,
         required: false,
-        default: ''
+        default: '',
+        customName: 'Email',
     },
 
     picture: {
         type: String,
         required: false,
-        default: false
+        default: false,
+        isFile: true,
+        customName: 'Profile Picture',
     },
 
     cellphone: {
         type: String,
         required: false,
+        customName: 'Cellphone number',
     },
     birthdate: {
         type: Date,
         required: false,
+        customName: 'Birth date',
     },
 
     active: {
         type: Boolean,
         required: true,
-        default: true
+        default: true,
+        customName: 'Active',
     },
     isBanned: {
         type: Boolean,
         required: true,
-        default: false
+        default: false,
+        customName: 'Banned User',
     },
-    custom: {
-        type: mongoose.Schema.Types.Mixed,
-        required: false,
-        default: false
-    }
+
 
 }, {
     timestamps: true
