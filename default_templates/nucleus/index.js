@@ -11,7 +11,6 @@ const morgan = require('morgan')
 const path = require('path')
 
 const http = require('http');
-const {log} = require('console');
 
 
 app.use(bodyParser.urlencoded({extended: true}));

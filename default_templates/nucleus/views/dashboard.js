@@ -64,7 +64,7 @@ router.get('/users', async function (req, res) {
 
 
     let datatable = await datatableHelper.dt_constructor({model: userModel, actions: 'Create,Update,read,delete'})
-    console.log(datatable)
+
 
     res.status(200).render('dashboard/users', {
         ...myAssets,

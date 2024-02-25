@@ -6,49 +6,49 @@ head
         if title
             | !{title}
     include template/styles.pug
+body.dark-mode
+    .wrapper
+        // Preloader
+        .preloader.flex-column.justify-content-center.align-items-center
+            img.animation__wobble(src='/cdn/images/nucleus_simple.png' alt='nucleus logo' height='120' width='120')
+        // Navbar
+        include template/navbar.pug
+        // /.navbar
+        // Main Sidebar Container
+        include template/main_menu.pug
 
-.wrapper
-    // Preloader
-    .preloader.flex-column.justify-content-center.align-items-center
-        img.animation__wobble(src='/cdn/images/nucleus_simple.png' alt='nucleus logo' height='120' width='120')
-    // Navbar
-    include template/navbar.pug
-    // /.navbar
-    // Main Sidebar Container
-    include template/main_menu.pug
+        .content-wrapper
+            include template/breadcrubs.pug
 
-    .content-wrapper
-        include template/breadcrubs.pug
+            section.content
+                .container-fluid
 
-        section.content
-            .container-fluid
-
-                .row
-                    .col-md-12
-                        .card
-                            .card-header
-                                h5.card-title Users
-                                .card-tools
-                                    button.btn.btn-tool(type='button' data-card-widget='collapse')
-                                        i.fas.fa-minus
-                                    .btn-group
-                                        button.btn.btn-tool.dropdown-toggle(type='button' data-toggle='dropdown')
-                                            i.fas.fa-wrench
-                                        .dropdown-menu.dropdown-menu-right(role='menu')
-                                            a.dropdown-item(href='#') Action
-                                            a.dropdown-item(href='#') Another action
-                                            a.dropdown-item(href='#') Something else here
-                                            a.dropdown-divider
-                                            a.dropdown-item(href='#') Separated link
-                                    button.btn.btn-tool(type='button' data-card-widget='remove')
-                                        i.fas.fa-times
-                            // /.card-header
-                            .card-body
-                                .row
-                                    .col-12
-                                        include components/datatable.pug
+                    .row
+                        .col-md-12
+                            .card
+                                .card-header
+                                    h5.card-title Users
+                                    .card-tools
+                                        button.btn.btn-tool(type='button' data-card-widget='collapse')
+                                            i.fas.fa-minus
+                                        .btn-group
+                                            button.btn.btn-tool.dropdown-toggle(type='button' data-toggle='dropdown')
+                                                i.fas.fa-wrench
+                                            .dropdown-menu.dropdown-menu-right(role='menu')
+                                                a.dropdown-item(href='#') Action
+                                                a.dropdown-item(href='#') Another action
+                                                a.dropdown-item(href='#') Something else here
+                                                a.dropdown-divider
+                                                a.dropdown-item(href='#') Separated link
+                                        button.btn.btn-tool(type='button' data-card-widget='remove')
+                                            i.fas.fa-times
+                                // /.card-header
+                                .card-body
+                                    .row
+                                        .col-12
+                                            include components/datatable.pug
 
 
 
-    include template/footer.pug
+        include template/footer.pug
 include template/scripts.pug
