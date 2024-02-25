@@ -58,3 +58,5 @@ g
 7default_templates/nucleus/models/configuration.model.js,a/1/a162a5184330a138e3282e477b6dac5e59a150ed
 b
 2default_templates/nucleus/helpers/apiato.helper.js,a/2/a2e844c06a5c23a7808ed84e5f81789fe7a16ecf
+V
+&default_templates/nucleus/package.json,4/f/4fad496a85097166fded0b993279bee70033dfbf

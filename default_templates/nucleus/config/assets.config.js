@@ -1,4 +1,5 @@
 let baseUrl = '/cdn/dashboard/'
+let baseUrl_site = '/cdn'
 
 module.exports = function () {
     this.assets = {
@@ -45,11 +46,26 @@ module.exports = function () {
                 baseUrl + 'dist/css/adminlte.min.css',
 
             ],
-            logo: ''
+            logo: '/cdn/images/nucleus_simple.png'
         },
         site: {
-            scripts: [],
-            styles: [],
+            logo: '/cdn/images/nucleusfull.png',
+            scripts: [
+                baseUrl_site + '/site/js/jquery-1.10.2.min.js',
+                baseUrl_site + '/site/js/jquery.backstretch.min.js',
+                baseUrl_site + '/site/js/jquery.countdown.min.js',
+                baseUrl_site + '/site/js/wow.min.js',
+                baseUrl_site + '/site/js/scripts.js',
+            ],
+            styles: [
+                'http://fonts.googleapis.com/css?family=Roboto:400,300,100,100italic,300italic,400italic,700,700italic',
+                baseUrl_site + '/site/bootstrap/css/bootstrap.min.css',
+                baseUrl_site + '/site/css/animate.css',
+                baseUrl_site + '/site/css/form-elements.css',
+                baseUrl_site + '/site/css/style.css',
+                baseUrl_site + '/site/css/media-queries.css',
+
+            ],
         }
     }
     this.getAssetsAdmin = function () {

@@ -28,6 +28,19 @@ router.get('/', async function (req, res) {
     })
 })
 
+router.get('/login', async function (req, res) {
+    let myAssets = new assets()
+    myAssets = myAssets.getAssetsAdmin()
+    myAssets.styles.push(baseUrl + 'dist/css/adminlte.min.css')
+    myAssets.scripts.push(baseUrl + 'dist/js/adminlte.min.js')
+    myAssets.scripts.push('/cdn/components/login.js')
+    res.status(200).render('dashboard/login', {
+        ...myAssets,
+        title: 'Nucleus :: Login',
+
+    })
+})
+
 router.get('/demo', async function (req, res) {
 
     let myAssets = new assets()
@@ -88,6 +101,21 @@ router.get('/users', async function (req, res) {
         toJS: JSON.stringify({
             datatable
         })
+
+    })
+})
+
+router.get('/*', async function (req, res) {
+    let myAssets = new assets()
+    myAssets = myAssets.getAssetsAdmin()
+    /* custom assets**/
+    res.status(200).render('dashboard/404', {
+        ...myAssets,
+
+        title: '404',
+
+
+        toJS: JSON.stringify({})
 
     })
 })
