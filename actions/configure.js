@@ -13,7 +13,8 @@ module.exports = async function ({dir, login, files}) {
 
     let fullpath = path.join(userHomeDir, 'plantilla')
     let configFile = path.join(userHomeDir, '.plantillajs', 'config.js')
-    let esLint = path.join(userHomeDir, '.plantillajs', '.eslintrc.js')
+    let packageJson = path.join(userHomeDir, '.plantillajs', 'package.json')
+
     let configFolder = path.join(userHomeDir, '.plantillajs')
 
     if (!fs.existsSync(configFolder)) {
@@ -83,6 +84,7 @@ module.exports = async function ({dir, login, files}) {
     `
 
     fs.writeFileSync(path.resolve(configFile), JSON.stringify(configJson, null, '\t'))
-    fs.writeFileSync(path.resolve(esLint), file_lint)
+    fs.copyFileSync(path.resolve('./../package_example.json'), path.resolve(packageJson));
+
     l('\t Config file saved correctly \t')
 }

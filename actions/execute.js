@@ -93,6 +93,16 @@ module.exports = async function ({name}) {
     let overwrite = conf.overwrite
     let cmd = conf.cmd
 
+    try {
+        process.chdir(path.join(plantillasPath, name));
+        const {stdout, stderr} = await execAsync('npm i');
+        console.log('Command executed:');
+        console.log('stdout:', stdout);
+    } catch (e) {
+
+    }
+
+
     l('Lets configure globals for replacers')
 
     let replacerObject = {

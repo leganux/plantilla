@@ -36,7 +36,7 @@ module.exports = async function ({name}) {
 
 
     let configFile = path.join(userHomeDir, '.plantillajs', 'config.js')
-    let esLint = path.join(userHomeDir, '.plantillajs', '.eslintrc.js')
+    let packageJson = path.join(userHomeDir, '.plantillajs', 'package.json')
 
 
     if (!fs.existsSync(configFile)) {
@@ -289,20 +289,10 @@ module.exports = async function ({name}) {
     fs.writeFileSync(path.resolve(dir, 'functions.js'), functionsFile)
     fs.writeFileSync(path.resolve(dir, 'config.json'), JSON.stringify(configJson, null, '\t'))
 
-    /*
-     TODO: reformat using eslint
-     l('\t Vamos a revisar el template... \t')
-     let {stdout, stderr} = await execAsync('npm i eslint -g');
-     if (stderr) {
-         l('\t Something occurs when verify template, check it out manually \t')
-     }
 
-     let exec_ = await execAsync('eslint -c ' + esLint + ' --fix ' + dir);
-     if (exec_.stderr) {
-         l('\t Something occurs when verify template, check it out manually \t')
-     }*/
-
+    fs.copyFileSync(path.resolve(packageJson), path.join(dir, 'package.json'));
     l('\t Template ' + configJson.name + ' created correctly \t')
+
 }
 
 
