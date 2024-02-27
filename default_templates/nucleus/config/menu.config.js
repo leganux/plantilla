@@ -1,7 +1,7 @@
 module.exports = {
-    profile:{
-        name:'Jon Doe',
-        picture:'/cdn/dashboard/dist/img/user2-160x160.jpg',
+    profile: {
+        name: 'Jon Doe',
+        picture: '/cdn/dashboard/dist/img/user2-160x160.jpg',
         href: '#',
     },
     navbar: [
@@ -35,14 +35,14 @@ module.exports = {
                     id: "1234567890",
 
                 }, {
-                    avatar: "/cdn/dashboard/dist/img/user1-128x128.jpg",
-                    name: "Jane doe",
-                    text: "I need your help...",
-                    time: "5 hours ago",
-                    href: "#",
-                    id: "12345698765",
+                avatar: "/cdn/dashboard/dist/img/user1-128x128.jpg",
+                name: "Jane doe",
+                text: "I need your help...",
+                time: "5 hours ago",
+                href: "#",
+                id: "12345698765",
 
-                }
+            }
 
             ]
     },
@@ -89,7 +89,7 @@ module.exports = {
                     title: 'Welcome',
                     href: '/dashboard',
                     icon: 'fas fa-tachometer-alt',
-                },{
+                }, {
                     title: 'Demo',
                     href: '/dashboard/demo',
                     icon: 'fas fa-tachometer-alt',
@@ -127,6 +127,16 @@ module.exports = {
                 }
 
             ]
+        },
+        {
+            type: 'simple',
+            title: 'Logout',
+            active: false,
+            badge: false,
+            badge_color: false,
+            icon: 'fas fa-times',
+            href: '/auth/logout',
+
         },
     ]
 }

@@ -12,6 +12,46 @@ const path = require('path')
 
 const http = require('http');
 
+const session = require('express-session');
+const RedisStore = require('connect-redis');
+const {createClient} = require('redis')
+
+
+let redisStore;
+let redisClient;
+
+if (process.env.REDIS_URL) {
+    redisClient = createClient()
+    redisClient.connect()
+    redisStore = new RedisStore({
+        client: redisClient,
+        prefix: "nucleus:",
+    })
+
+} else {
+    console.log("Redis is not available. Falling back to memory store.");
+}
+
+let sessionMiddleware;
+
+if (redisClient) {
+    sessionMiddleware = session({
+        secret: process.env.SESSION_SECRET || 'N7Cl3usSecret_',
+        resave: true,
+        saveUninitialized: true,
+        store: redisStore,
+        cookie: {secure: false} // Set to true if using HTTPS
+    });
+} else {
+    sessionMiddleware = session({
+        secret: process.env.SESSION_SECRET || 'N7Cl3usSecret_',
+        resave: true,
+        saveUninitialized: true,
+        cookie: {secure: false} // Set to true if using HTTPS
+    });
+}
+
+app.use(sessionMiddleware);
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

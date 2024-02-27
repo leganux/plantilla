@@ -7,12 +7,15 @@ let datatableHelper = require('./../helpers/datatable.helper')
 let userModel = require('./../models/user.model')
 let configModel = require('./../models/configuration.model')
 
+let middlewareSession = require('./../auth/functions.auth').middleware
+
 let baseUrl = '/cdn/dashboard/'
 
 
-router.get('/', async function (req, res) {
+router.get('/', middlewareSession, async function (req, res) {
     let myAssets = new assets()
     myAssets = myAssets.getAssetsAdmin()
+
 
     res.status(200).render('dashboard/dashboard', {
         ...myAssets, ...menu,
@@ -41,7 +44,7 @@ router.get('/login', async function (req, res) {
     })
 })
 
-router.get('/demo', async function (req, res) {
+router.get('/demo', middlewareSession, async function (req, res) {
 
     let myAssets = new assets()
     myAssets = myAssets.getAssetsAdmin()
@@ -68,7 +71,7 @@ router.get('/demo', async function (req, res) {
 
     })
 })
-router.get('/users', async function (req, res) {
+router.get('/users', middlewareSession, async function (req, res) {
     let myAssets = new assets()
     myAssets = myAssets.getAssetsAdmin()
     /* custom assets**/
@@ -99,13 +102,15 @@ router.get('/users', async function (req, res) {
         ],
         datatable,
         toJS: JSON.stringify({
-            datatable
+            datatable,
+            user: req?.session?.user || null,
+            api_token: req?.session?.token || null
         })
 
     })
 })
 
-router.get('/*', async function (req, res) {
+router.get('/*', middlewareSession, async function (req, res) {
     let myAssets = new assets()
     myAssets = myAssets.getAssetsAdmin()
     /* custom assets**/

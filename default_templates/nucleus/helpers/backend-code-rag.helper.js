@@ -15,7 +15,9 @@ let api = async function (controllerFunction, req) {
 
         await controllerFunction(fakeReq, fakeRes)
 
-        if (String(fakeRes.status_).in(['200', '201', '202', '204', '203'])) {
+        console.log('fakeRes', fakeRes)
+
+        if ((fakeRes.status_ >= 200 && fakeRes.status_ < 300)) {
             return fakeRes?.json_
         } else {
             console.error('Error en fake request')
@@ -28,205 +30,139 @@ let api = async function (controllerFunction, req) {
     }
 }
 
+class CodeRag {
+    constructor() {
+        this.token = 'Bearer NONE';
+        this.resource = false;
+        this.controller = false;
+    }
+
+    setResource(resource = false) {
+        if (resource) {
+            this.resource = resource;
+            try {
+                this.controller = require(`./../controllers/${resource}.controller.js`);
+            } catch (e) {
+                throw e;
+            }
+        }
+        return this;
+    }
+
+    async createOne(body = {}, query = {}, headers = {}) {
+        this.validateResource();
+        this.validateControllerMethod('createOne');
+        const req = {body, query, headers};
+        try {
+            return await api(this.controller.createOne, req);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async createMany(body = [], query = {}, headers = {}) {
+        this.validateResource();
+        this.validateControllerMethod('createMany');
+        const req = {body, query, headers};
+        try {
+            return await api(this.controller.createMany, req);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getMany(query = {}, headers = {}) {
+        this.validateResource();
+        this.validateControllerMethod('getMany');
+        const req = {query, headers};
+        try {
+            return await api(this.controller.getMany, req);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getOneWhere(query = {}, headers = {}) {
+        this.validateResource();
+        this.validateControllerMethod('getOneWhere');
+        const req = {query, headers};
+        try {
+            return await api(this.controller.getOneWhere, req);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async getOneById(id = '', query = {}, headers = {}) {
+        this.validateResource();
+        this.validateControllerMethod('getOneById');
+        const req = {query, params: {id}, headers};
+        try {
+            return await api(this.controller.getOneById, req);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async findUpdateOrCreate(body = {}, query = {}, headers = {}) {
+        this.validateResource();
+        this.validateControllerMethod('findUpdateOrCreate');
+        const req = {query, body, headers};
+        try {
+            return await api(this.controller.findUpdateOrCreate, req);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async findUpdate(body = {}, query = {}, headers = {}) {
+        this.validateResource();
+        this.validateControllerMethod('findUpdate');
+        const req = {query, body, headers};
+        try {
+            return await api(this.controller.findUpdate, req);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async updateById(id = '', body = {}, query = {}, headers = {}) {
+        this.validateResource();
+        this.validateControllerMethod('updateById');
+        const req = {query, body, params: {id}, headers};
+        try {
+            return await api(this.controller.updateById, req);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async findIdAndDelete(id = '', body = {}, query = {}, headers = {}) {
+        this.validateResource();
+        this.validateControllerMethod('findIdAndDelete');
+        const req = {query, body, params: {id}, headers};
+        try {
+            return await api(this.controller.findIdAndDelete, req);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    validateResource() {
+        if (!this.resource || !this.controller) {
+            throw new Error('Resource not selected');
+        }
+    }
+
+    validateControllerMethod(method) {
+        if (!this.controller[method] || typeof this.controller[method] !== 'function') {
+            throw new Error(`Resource has no access to ${method} function`);
+        }
+    }
+}
+
+
 module.exports = {
     api,
-    code_rag: function () {
-        this.token = 'Bearer NONE'
-        this.resource = false
-        this.controller = false
-        this.setResource = function (resource = false) {
-            let el = this
-            if (resource) {
-                el.resource = resource
-                try {
-                    el.controller = require('./../controllers/' + resource + '.controller.js')
-                } catch (e) {
-                    throw e
-                }
-            }
-            return el
-        }
-        this.createOne = async function (body = {}, query = {}, headers = {}) {
-            let el = this
-            if (!el.resource || !el.controller) {
-                throw new Error('Resource not selected')
-                return
-            }
-            if (!el?.controller?.createOne || typeof el?.controller?.createOne != 'function') {
-                throw new Error('Resource has no acces to createOneFunction')
-                return
-            }
-            let req = {
-                body, query, headers
-            }
-            try {
-                let resp = await api(el?.controller?.createOne, req)
-                return resp
-            } catch (e) {
-                throw e
-            }
-        }
-        this.createMany = async function (body = [], query = {}, headers = {}) {
-            let el = this
-            if (!el.resource || !el.controller) {
-                throw new Error('Resource not selected')
-                return
-            }
-            if (!el?.controller?.createMany || typeof el?.controller?.createMany != 'function') {
-                throw new Error('Resource has no acces to createOneFunction')
-                return
-            }
-            let req = {
-                body, query, headers
-            }
-            try {
-                let resp = await api(el?.controller?.createMany, req)
-                return resp
-            } catch (e) {
-                throw e
-            }
-        }
-        this.getMany = async function (query = {}, headers = {}) {
-            let el = this
-            if (!el.resource || !el.controller) {
-                throw new Error('Resource not selected')
-                return
-            }
-            if (!el?.controller?.getMany || typeof el?.controller?.getMany != 'function') {
-                throw new Error('Resource has no acces to createOneFunction')
-                return
-            }
-            let req = {
-                query, headers
-            }
-            try {
-                let resp = await api(el?.controller?.getMany, req)
-                return resp
-            } catch (e) {
-                throw e
-            }
-        }
-        this.getOneWhere = async function (query = {}, headers = {}) {
-            let el = this
-            if (!el.resource || !el.controller) {
-                throw new Error('Resource not selected')
-                return
-            }
-            if (!el?.controller?.getOneWhere || typeof el?.controller?.getOneWhere != 'function') {
-                throw new Error('Resource has no acces to createOneFunction')
-                return
-            }
-            let req = {
-                query, headers
-            }
-            try {
-                let resp = await api(el?.controller?.getOneWhere, req)
-                return resp
-            } catch (e) {
-                throw e
-            }
-        }
-        this.getOneById = async function (id = '', query = {}, headers = {}) {
-            let el = this
-            if (!el.resource || !el.controller) {
-                throw new Error('Resource not selected')
-                return
-            }
-            if (!el?.controller?.getOneById || typeof el?.controller?.getOneById != 'function') {
-                throw new Error('Resource has no acces to createOneFunction')
-                return
-            }
-            let req = {
-                query, params: {id}, headers
-            }
-            try {
-                let resp = await api(el?.controller?.getOneById, req)
-                return resp
-            } catch (e) {
-                throw e
-            }
-        }
-        this.findUpdateOrCreate = async function (body = {}, query = {}, headers = {}) {
-            let el = this
-            if (!el.resource || !el.controller) {
-                throw new Error('Resource not selected')
-                return
-            }
-            if (!el?.controller?.findUpdateOrCreate || typeof el?.controller?.findUpdateOrCreate != 'function') {
-                throw new Error('Resource has no acces to createOneFunction')
-                return
-            }
-            let req = {
-                query, body, headers
-            }
-            try {
-                let resp = await api(el?.controller?.findUpdateOrCreate, req)
-                return resp
-            } catch (e) {
-                throw e
-            }
-
-        }
-        this.findUpdate = async function (body = {}, query = {}, headers = {}) {
-            let el = this
-            if (!el.resource || !el.controller) {
-                throw new Error('Resource not selected')
-                return
-            }
-            if (!el?.controller?.findUpdate || typeof el?.controller?.findUpdate != 'function') {
-                throw new Error('Resource has no acces to createOneFunction')
-                return
-            }
-            let req = {
-                query, body, headers
-            }
-            try {
-                let resp = await api(el?.controller?.findUpdate, req)
-                return resp
-            } catch (e) {
-                throw e
-            }
-        }
-        this.updateById = async function (id = '', body = {}, query = {}, headers = {}) {
-            let el = this
-            if (!el.resource || !el.controller) {
-                throw new Error('Resource not selected')
-                return
-            }
-            if (!el?.controller?.updateById || typeof el?.controller?.updateById != 'function') {
-                throw new Error('Resource has no acces to createOneFunction')
-                return
-            }
-            let req = {
-                query, body, params: {id}, headers
-            }
-            try {
-                let resp = await api(el?.controller?.updateById, req)
-                return resp
-            } catch (e) {
-                throw e
-            }
-        }
-        this.findIdAndDelete = async function (id = '', body = {}, query = {}, headers = {}) {
-            let el = this
-            if (!el.resource || !el.controller) {
-                throw new Error('Resource not selected')
-                return
-            }
-            if (!el?.controller?.findIdAndDelete || typeof el?.controller?.findIdAndDelete != 'function') {
-                throw new Error('Resource has no acces to createOneFunction')
-                return
-            }
-            let req = {
-                query, body, params: {id}, headers
-            }
-            try {
-                let resp = await api(el?.controller?.findIdAndDelete, req)
-                return resp
-            } catch (e) {
-                throw e
-            }
-        }
-
-    }
+    CodeRag
 }

@@ -4,14 +4,13 @@ let auth = require('./functions.auth')
 
 //ROUTE TO CREATE TOKEN AND LOGIN SESSION
 router.post('/login', auth.login)
+router.get('/logout', auth.logout)
 
 //VALIDATE THE TOKEN
 router.post('/validate', auth.validate)
 
-//MIDDLEWARE
-router.post('/middleware', auth.middleware)
+router.get('/createSession', auth.createSession)
 
-//THIS ROUTE CHANGE THE PASSWORD
-router.post('/change_password/:id', auth.changePassword)
+
 
 module.exports = router
