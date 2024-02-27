@@ -1,0 +1,62 @@
+doctype html
+head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title !{title}
+    // Google Font: Source Sans Pro
+    include template/styles
+body(style=`
+background-image:url(https://source.unsplash.com/random/?night,city);
+background-position:center;
+background-size: cover;
+background-repeat: no-repeat;
+`)
+    .container
+        br
+        br
+        br
+        .row.mt-5
+            .col-12
+                center
+                    .login-box(style='opacity:90%;').bg-dark
+                        // /.login-logo
+                        .card.card-outline.card-primary.bg-dark
+                            .card-header.text-center.bg-dark
+                                a.h1(href='/')
+                                    img.img-fluid(src="/cdn/images/nucleusfull.png" width="300px")
+                            .card-body.bg-dark
+                                p.login-box-msg Sign in to start your session
+
+                                    .input-group.mb-3
+                                        input.form-control(type='email' placeholder='Email')#nucleus_input_email_sign_in
+                                        .input-group-append
+                                            .input-group-text
+                                                span.fas.fa-envelope
+                                    .input-group.mb-3
+                                        input.form-control(type='password' placeholder='Password')#nucleus_input_password_sign_in
+                                        .input-group-append
+                                            .input-group-text
+                                                span.fas.fa-lock
+
+
+                                        .col-4
+                                            button.btn.btn-primary.btn-block#nucleus_btn_sign_in Sign In
+
+
+
+                                p.mb-1
+                                    a(href='forgot-password.html') I forgot my password
+                                p.mb-0
+                                    a.text-center(href='register.html') Register a new membership
+                            .card-footer.mb-5.mt-5
+                                strong
+                                    | Copyright &copy; 2014-2024
+                                    | nucleus inspired in HBO's Silicon Valley sitcom.
+                                    br
+                                    b Powered by &nbsp;
+                                    a(href='https://leganux.com') leganux.com
+                                    | .&nbsp;
+                                |     All rights reserved.
+
+// jQuery
+include template/scripts

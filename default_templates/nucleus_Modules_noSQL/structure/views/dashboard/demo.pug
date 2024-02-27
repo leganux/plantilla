@@ -1,0 +1,660 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  title Nucleus dashboard
+  include template/styles.pug
+  
+.wrapper
+  // Preloader
+  .preloader.flex-column.justify-content-center.align-items-center
+    img.animation__wobble(src='/cdn/images/nucleus_simple.png' alt='nucleus logo' height='120' width='120')
+  // Navbar
+  include template/navbar.pug
+  // /.navbar
+  // Main Sidebar Container
+  include template/main_menu.pug
+      
+  .content-wrapper
+    include template/breadcrubs.pug
+      
+   
+    section.content
+      .container-fluid
+        // Info boxes
+        .row
+          .col-12.col-sm-6.col-md-3
+            .info-box
+              span.info-box-icon.bg-info.elevation-1
+                i.fas.fa-cog
+              .info-box-content
+                span.info-box-text CPU Traffic
+                span.info-box-number
+                  | 10
+                  small %
+              // /.info-box-content
+            // /.info-box
+          // /.col
+          .col-12.col-sm-6.col-md-3
+            .info-box.mb-3
+              span.info-box-icon.bg-danger.elevation-1
+                i.fas.fa-thumbs-up
+              .info-box-content
+                span.info-box-text Likes
+                span.info-box-number 41,410
+              // /.info-box-content
+            // /.info-box
+          // /.col
+          // fix for small devices only
+          .clearfix.hidden-md-up
+          .col-12.col-sm-6.col-md-3
+            .info-box.mb-3
+              span.info-box-icon.bg-success.elevation-1
+                i.fas.fa-shopping-cart
+              .info-box-content
+                span.info-box-text Sales
+                span.info-box-number 760
+              // /.info-box-content
+            // /.info-box
+          // /.col
+          .col-12.col-sm-6.col-md-3
+            .info-box.mb-3
+              span.info-box-icon.bg-warning.elevation-1
+                i.fas.fa-users
+              .info-box-content
+                span.info-box-text New Members
+                span.info-box-number 2,000
+              // /.info-box-content
+            // /.info-box
+          // /.col
+        // /.row
+        .row
+          .col-md-12
+            .card
+              .card-header
+                h5.card-title Monthly Recap Report
+                .card-tools
+                  button.btn.btn-tool(type='button' data-card-widget='collapse')
+                    i.fas.fa-minus
+                  .btn-group
+                    button.btn.btn-tool.dropdown-toggle(type='button' data-toggle='dropdown')
+                      i.fas.fa-wrench
+                    .dropdown-menu.dropdown-menu-right(role='menu')
+                      a.dropdown-item(href='#') Action
+                      a.dropdown-item(href='#') Another action
+                      a.dropdown-item(href='#') Something else here
+                      a.dropdown-divider
+                      a.dropdown-item(href='#') Separated link
+                  button.btn.btn-tool(type='button' data-card-widget='remove')
+                    i.fas.fa-times
+              // /.card-header
+              .card-body
+                .row
+                  .col-md-8
+                    p.text-center
+                      strong Sales: 1 Jan, 2014 - 30 Jul, 2014
+                    .chart
+                      // Sales Chart Canvas
+                      canvas#salesChart(height='180' style='height: 180px;')
+                    // /.chart-responsive
+                  // /.col
+                  .col-md-4
+                    p.text-center
+                      strong Goal Completion
+                    .progress-group
+                      | Add Products to Cart
+                      span.float-right
+                        b 160
+                        | /200
+                      .progress.progress-sm
+                        .progress-bar.bg-primary(style='width: 80%')
+                    // /.progress-group
+                    .progress-group
+                      | Complete Purchase
+                      span.float-right
+                        b 310
+                        | /400
+                      .progress.progress-sm
+                        .progress-bar.bg-danger(style='width: 75%')
+                    // /.progress-group
+                    .progress-group
+                      span.progress-text Visit Premium Page
+                      span.float-right
+                        b 480
+                        | /800
+                      .progress.progress-sm
+                        .progress-bar.bg-success(style='width: 60%')
+                    // /.progress-group
+                    .progress-group
+                      | Send Inquiries
+                      span.float-right
+                        b 250
+                        | /500
+                      .progress.progress-sm
+                        .progress-bar.bg-warning(style='width: 50%')
+                    // /.progress-group
+                  // /.col
+                // /.row
+              // ./card-body
+              .card-footer
+                .row
+                  .col-sm-3.col-6
+                    .description-block.border-right
+                      span.description-percentage.text-success
+                        i.fas.fa-caret-up
+                        |  17%
+                      h5.description-header $35,210.43
+                      span.description-text TOTAL REVENUE
+                    // /.description-block
+                  // /.col
+                  .col-sm-3.col-6
+                    .description-block.border-right
+                      span.description-percentage.text-warning
+                        i.fas.fa-caret-left
+                        |  0%
+                      h5.description-header $10,390.90
+                      span.description-text TOTAL COST
+                    // /.description-block
+                  // /.col
+                  .col-sm-3.col-6
+                    .description-block.border-right
+                      span.description-percentage.text-success
+                        i.fas.fa-caret-up
+                        |  20%
+                      h5.description-header $24,813.53
+                      span.description-text TOTAL PROFIT
+                    // /.description-block
+                  // /.col
+                  .col-sm-3.col-6
+                    .description-block
+                      span.description-percentage.text-danger
+                        i.fas.fa-caret-down
+                        |  18%
+                      h5.description-header 1200
+                      span.description-text GOAL COMPLETIONS
+                    // /.description-block
+                // /.row
+              // /.card-footer
+            // /.card
+          // /.col
+        // /.row
+        // Main row
+        .row
+          // Left col
+          .col-md-8
+            // MAP & BOX PANE
+            .card
+              .card-header
+                h3.card-title US-Visitors Report
+                .card-tools
+                  button.btn.btn-tool(type='button' data-card-widget='collapse')
+                    i.fas.fa-minus
+                  button.btn.btn-tool(type='button' data-card-widget='remove')
+                    i.fas.fa-times
+              // /.card-header
+              .card-body.p-0
+                .d-md-flex
+                  .p-1.flex-fill(style='overflow: hidden')
+                    // Map will be created here
+                    #world-map-markers(style='height: 325px; overflow: hidden')
+                      .map
+                  .card-pane-right.bg-success.pt-2.pb-2.pl-4.pr-4
+                    .description-block.mb-4
+                      .sparkbar.pad(data-color='#fff') 90,70,90,70,75,80,70
+                      h5.description-header 8390
+                      span.description-text Visits
+                    // /.description-block
+                    .description-block.mb-4
+                      .sparkbar.pad(data-color='#fff') 90,50,90,70,61,83,63
+                      h5.description-header 30%
+                      span.description-text Referrals
+                    // /.description-block
+                    .description-block
+                      .sparkbar.pad(data-color='#fff') 90,50,90,70,61,83,63
+                      h5.description-header 70%
+                      span.description-text Organic
+                    // /.description-block
+                  // /.card-pane-right
+                // /.d-md-flex
+              // /.card-body
+            // /.card
+            .row
+              .col-md-6
+                // DIRECT CHAT
+                .card.direct-chat.direct-chat-warning
+                  .card-header
+                    h3.card-title Direct Chat
+                    .card-tools
+                      span.badge.badge-warning(title='3 New Messages') 3
+                      button.btn.btn-tool(type='button' data-card-widget='collapse')
+                        i.fas.fa-minus
+                      button.btn.btn-tool(type='button' title='Contacts' data-widget='chat-pane-toggle')
+                        i.fas.fa-comments
+                      button.btn.btn-tool(type='button' data-card-widget='remove')
+                        i.fas.fa-times
+                  // /.card-header
+                  .card-body
+                    // Conversations are loaded here
+                    .direct-chat-messages
+                      // Message. Default to the left
+                      .direct-chat-msg
+                        .direct-chat-infos.clearfix
+                          span.direct-chat-name.float-left Alexander Pierce
+                          span.direct-chat-timestamp.float-right 23 Jan 2:00 pm
+                        // /.direct-chat-infos
+                        img.direct-chat-img(src='/cdn/dashboard/dist/img/user1-128x128.jpg' alt='message user image')
+                        // /.direct-chat-img
+                        .direct-chat-text
+                          | Is this template really for free? That&apos;s unbelievable!
+                        // /.direct-chat-text
+                      // /.direct-chat-msg
+                      // Message to the right
+                      .direct-chat-msg.right
+                        .direct-chat-infos.clearfix
+                          span.direct-chat-name.float-right Sarah Bullock
+                          span.direct-chat-timestamp.float-left 23 Jan 2:05 pm
+                        // /.direct-chat-infos
+                        img.direct-chat-img(src='/cdn/dashboard/dist/img/user3-128x128.jpg' alt='message user image')
+                        // /.direct-chat-img
+                        .direct-chat-text
+                          | You better believe it!
+                        // /.direct-chat-text
+                      // /.direct-chat-msg
+                      // Message. Default to the left
+                      .direct-chat-msg
+                        .direct-chat-infos.clearfix
+                          span.direct-chat-name.float-left Alexander Pierce
+                          span.direct-chat-timestamp.float-right 23 Jan 5:37 pm
+                        // /.direct-chat-infos
+                        img.direct-chat-img(src='/cdn/dashboard/dist/img/user1-128x128.jpg' alt='message user image')
+                        // /.direct-chat-img
+                        .direct-chat-text
+                          | Working with AdminLTE on a great new app! Wanna join?
+                        // /.direct-chat-text
+                      // /.direct-chat-msg
+                      // Message to the right
+                      .direct-chat-msg.right
+                        .direct-chat-infos.clearfix
+                          span.direct-chat-name.float-right Sarah Bullock
+                          span.direct-chat-timestamp.float-left 23 Jan 6:10 pm
+                        // /.direct-chat-infos
+                        img.direct-chat-img(src='/cdn/dashboard/dist/img/user3-128x128.jpg' alt='message user image')
+                        // /.direct-chat-img
+                        .direct-chat-text
+                          | I would love to.
+                        // /.direct-chat-text
+                      // /.direct-chat-msg
+                    // /.direct-chat-messages
+                    // Contacts are loaded here
+                    .direct-chat-contacts
+                      ul.contacts-list
+                        li
+                          a(href='#')
+                            img.contacts-list-img(src='/cdn/dashboard/dist/img/user1-128x128.jpg' alt='User Avatar')
+                            .contacts-list-info
+                              span.contacts-list-name
+                                | Count Dracula
+                                small.contacts-list-date.float-right 2/28/2015
+                              span.contacts-list-msg How have you been? I was...
+                            // /.contacts-list-info
+                        // End Contact Item
+                        li
+                          a(href='#')
+                            img.contacts-list-img(src='/cdn/dashboard/dist/img/user7-128x128.jpg' alt='User Avatar')
+                            .contacts-list-info
+                              span.contacts-list-name
+                                | Sarah Doe
+                                small.contacts-list-date.float-right 2/23/2015
+                              span.contacts-list-msg I will be waiting for...
+                            // /.contacts-list-info
+                        // End Contact Item
+                        li
+                          a(href='#')
+                            img.contacts-list-img(src='/cdn/dashboard/dist/img/user3-128x128.jpg' alt='User Avatar')
+                            .contacts-list-info
+                              span.contacts-list-name
+                                | Nadia Jolie
+                                small.contacts-list-date.float-right 2/20/2015
+                              span.contacts-list-msg I&apos;ll call you back at...
+                            // /.contacts-list-info
+                        // End Contact Item
+                        li
+                          a(href='#')
+                            img.contacts-list-img(src='/cdn/dashboard/dist/img/user5-128x128.jpg' alt='User Avatar')
+                            .contacts-list-info
+                              span.contacts-list-name
+                                | Nora S. Vans
+                                small.contacts-list-date.float-right 2/10/2015
+                              span.contacts-list-msg Where is your new...
+                            // /.contacts-list-info
+                        // End Contact Item
+                        li
+                          a(href='#')
+                            img.contacts-list-img(src='/cdn/dashboard/dist/img/user6-128x128.jpg' alt='User Avatar')
+                            .contacts-list-info
+                              span.contacts-list-name
+                                | John K.
+                                small.contacts-list-date.float-right 1/27/2015
+                              span.contacts-list-msg Can I take a look at...
+                            // /.contacts-list-info
+                        // End Contact Item
+                        li
+                          a(href='#')
+                            img.contacts-list-img(src='/cdn/dashboard/dist/img/user8-128x128.jpg' alt='User Avatar')
+                            .contacts-list-info
+                              span.contacts-list-name
+                                | Kenneth M.
+                                small.contacts-list-date.float-right 1/4/2015
+                              span.contacts-list-msg Never mind I found...
+                            // /.contacts-list-info
+                        // End Contact Item
+                      // /.contacts-list
+                    // /.direct-chat-pane
+                  // /.card-body
+                  .card-footer
+                    form(action='#' method='post')
+                      .input-group
+                        input.form-control(type='text' name='message' placeholder='Type Message ...')
+                        span.input-group-append
+                          button.btn.btn-warning(type='button') Send
+                  // /.card-footer
+                // /.direct-chat
+              // /.col
+              .col-md-6
+                // USERS LIST
+                .card
+                  .card-header
+                    h3.card-title Latest Members
+                    .card-tools
+                      span.badge.badge-danger 8 New Members
+                      button.btn.btn-tool(type='button' data-card-widget='collapse')
+                        i.fas.fa-minus
+                      button.btn.btn-tool(type='button' data-card-widget='remove')
+                        i.fas.fa-times
+                  // /.card-header
+                  .card-body.p-0
+                    ul.users-list.clearfix
+                      li
+                        img(src='/cdn/dashboard/dist/img/user1-128x128.jpg' alt='User Image')
+                        a.users-list-name(href='#') Alexander Pierce
+                        span.users-list-date Today
+                      li
+                        img(src='/cdn/dashboard/dist/img/user8-128x128.jpg' alt='User Image')
+                        a.users-list-name(href='#') Norman
+                        span.users-list-date Yesterday
+                      li
+                        img(src='/cdn/dashboard/dist/img/user7-128x128.jpg' alt='User Image')
+                        a.users-list-name(href='#') Jane
+                        span.users-list-date 12 Jan
+                      li
+                        img(src='/cdn/dashboard/dist/img/user6-128x128.jpg' alt='User Image')
+                        a.users-list-name(href='#') John
+                        span.users-list-date 12 Jan
+                      li
+                        img(src='/cdn/dashboard/dist/img/user2-160x160.jpg' alt='User Image')
+                        a.users-list-name(href='#') Alexander
+                        span.users-list-date 13 Jan
+                      li
+                        img(src='/cdn/dashboard/dist/img/user5-128x128.jpg' alt='User Image')
+                        a.users-list-name(href='#') Sarah
+                        span.users-list-date 14 Jan
+                      li
+                        img(src='/cdn/dashboard/dist/img/user4-128x128.jpg' alt='User Image')
+                        a.users-list-name(href='#') Nora
+                        span.users-list-date 15 Jan
+                      li
+                        img(src='/cdn/dashboard/dist/img/user3-128x128.jpg' alt='User Image')
+                        a.users-list-name(href='#') Nadia
+                        span.users-list-date 15 Jan
+                    // /.users-list
+                  // /.card-body
+                  .card-footer.text-center
+                    a(href='javascript:') View All Users
+                  // /.card-footer
+                // /.card
+              // /.col
+            // /.row
+            // TABLE: LATEST ORDERS
+            .card
+              .card-header.border-transparent
+                h3.card-title Latest Orders
+                .card-tools
+                  button.btn.btn-tool(type='button' data-card-widget='collapse')
+                    i.fas.fa-minus
+                  button.btn.btn-tool(type='button' data-card-widget='remove')
+                    i.fas.fa-times
+              // /.card-header
+              .card-body.p-0
+                .table-responsive
+                  table.table.m-0
+                    thead
+                      tr
+                        th Order ID
+                        th Item
+                        th Status
+                        th Popularity
+                    tbody
+                      tr
+                        td
+                          a(href='pages/examples/invoice.html') OR9842
+                        td Call of Duty IV
+                        td
+                          span.badge.badge-success Shipped
+                        td
+                          .sparkbar(data-color='#00a65a' data-height='20') 90,80,90,-70,61,-83,63
+                      tr
+                        td
+                          a(href='pages/examples/invoice.html') OR1848
+                        td Samsung Smart TV
+                        td
+                          span.badge.badge-warning Pending
+                        td
+                          .sparkbar(data-color='#f39c12' data-height='20') 90,80,-90,70,61,-83,68
+                      tr
+                        td
+                          a(href='pages/examples/invoice.html') OR7429
+                        td iPhone 6 Plus
+                        td
+                          span.badge.badge-danger Delivered
+                        td
+                          .sparkbar(data-color='#f56954' data-height='20') 90,-80,90,70,-61,83,63
+                      tr
+                        td
+                          a(href='pages/examples/invoice.html') OR7429
+                        td Samsung Smart TV
+                        td
+                          span.badge.badge-info Processing
+                        td
+                          .sparkbar(data-color='#00c0ef' data-height='20') 90,80,-90,70,-61,83,63
+                      tr
+                        td
+                          a(href='pages/examples/invoice.html') OR1848
+                        td Samsung Smart TV
+                        td
+                          span.badge.badge-warning Pending
+                        td
+                          .sparkbar(data-color='#f39c12' data-height='20') 90,80,-90,70,61,-83,68
+                      tr
+                        td
+                          a(href='pages/examples/invoice.html') OR7429
+                        td iPhone 6 Plus
+                        td
+                          span.badge.badge-danger Delivered
+                        td
+                          .sparkbar(data-color='#f56954' data-height='20') 90,-80,90,70,-61,83,63
+                      tr
+                        td
+                          a(href='pages/examples/invoice.html') OR9842
+                        td Call of Duty IV
+                        td
+                          span.badge.badge-success Shipped
+                        td
+                          .sparkbar(data-color='#00a65a' data-height='20') 90,80,90,-70,61,-83,63
+                // /.table-responsive
+              // /.card-body
+              .card-footer.clearfix
+                a.btn.btn-sm.btn-info.float-left(href='javascript:void(0)') Place New Order
+                a.btn.btn-sm.btn-secondary.float-right(href='javascript:void(0)') View All Orders
+              // /.card-footer
+            // /.card
+          // /.col
+          .col-md-4
+            // Info Boxes Style 2
+            .info-box.mb-3.bg-warning
+              span.info-box-icon
+                i.fas.fa-tag
+              .info-box-content
+                span.info-box-text Inventory
+                span.info-box-number 5,200
+              // /.info-box-content
+            // /.info-box
+            .info-box.mb-3.bg-success
+              span.info-box-icon
+                i.far.fa-heart
+              .info-box-content
+                span.info-box-text Mentions
+                span.info-box-number 92,050
+              // /.info-box-content
+            // /.info-box
+            .info-box.mb-3.bg-danger
+              span.info-box-icon
+                i.fas.fa-cloud-download-alt
+              .info-box-content
+                span.info-box-text Downloads
+                span.info-box-number 114,381
+              // /.info-box-content
+            // /.info-box
+            .info-box.mb-3.bg-info
+              span.info-box-icon
+                i.far.fa-comment
+              .info-box-content
+                span.info-box-text Direct Messages
+                span.info-box-number 163,921
+              // /.info-box-content
+            // /.info-box
+            .card
+              .card-header
+                h3.card-title Browser Usage
+                .card-tools
+                  button.btn.btn-tool(type='button' data-card-widget='collapse')
+                    i.fas.fa-minus
+                  button.btn.btn-tool(type='button' data-card-widget='remove')
+                    i.fas.fa-times
+              // /.card-header
+              .card-body
+                .row
+                  .col-md-8
+                    .chart-responsive
+                      canvas#pieChart(height='150')
+                    // ./chart-responsive
+                  // /.col
+                  .col-md-4
+                    ul.chart-legend.clearfix
+                      li
+                        i.far.fa-circle.text-danger
+                        |  Chrome
+                      li
+                        i.far.fa-circle.text-success
+                        |  IE
+                      li
+                        i.far.fa-circle.text-warning
+                        |  FireFox
+                      li
+                        i.far.fa-circle.text-info
+                        |  Safari
+                      li
+                        i.far.fa-circle.text-primary
+                        |  Opera
+                      li
+                        i.far.fa-circle.text-secondary
+                        |  Navigator
+                  // /.col
+                // /.row
+              // /.card-body
+              .card-footer.p-0
+                ul.nav.nav-pills.flex-column
+                  li.nav-item
+                    a.nav-link(href='#')
+                      | United States of America
+                      span.float-right.text-danger
+                        i.fas.fa-arrow-down.text-sm
+                        |                         12%
+                  li.nav-item
+                    a.nav-link(href='#')
+                      | India
+                      span.float-right.text-success
+                        i.fas.fa-arrow-up.text-sm
+                        |  4%
+                  li.nav-item
+                    a.nav-link(href='#')
+                      | China
+                      span.float-right.text-warning
+                        i.fas.fa-arrow-left.text-sm
+                        |  0%
+              // /.footer
+            // /.card
+            // PRODUCT LIST
+            .card
+              .card-header
+                h3.card-title Recently Added Products
+                .card-tools
+                  button.btn.btn-tool(type='button' data-card-widget='collapse')
+                    i.fas.fa-minus
+                  button.btn.btn-tool(type='button' data-card-widget='remove')
+                    i.fas.fa-times
+              // /.card-header
+              .card-body.p-0
+                ul.products-list.product-list-in-card.pl-2.pr-2
+                  li.item
+                    .product-img
+                      img.img-size-50(src='/cdn/dashboard/dist/img/default-150x150.png' alt='Product Image')
+                    .product-info
+                      a.product-title(href='javascript:void(0)')
+                        | Samsung TV
+                        span.badge.badge-warning.float-right $1800
+                      span.product-description
+                        | Samsung 32&quot; 1080p 60Hz LED Smart HDTV.
+                  // /.item
+                  li.item
+                    .product-img
+                      img.img-size-50(src='/cdn/dashboard/dist/img/default-150x150.png' alt='Product Image')
+                    .product-info
+                      a.product-title(href='javascript:void(0)')
+                        | Bicycle
+                        span.badge.badge-info.float-right $700
+                      span.product-description
+                        | 26&quot; Mongoose Dolomite Men&apos;s 7-speed, Navy Blue.
+                  // /.item
+                  li.item
+                    .product-img
+                      img.img-size-50(src='/cdn/dashboard/dist/img/default-150x150.png' alt='Product Image')
+                    .product-info
+                      a.product-title(href='javascript:void(0)')
+                        | Xbox One 
+                        span.badge.badge-danger.float-right
+                          | $350
+                      span.product-description
+                        | Xbox One Console Bundle with Halo Master Chief Collection.
+                  // /.item
+                  li.item
+                    .product-img
+                      img.img-size-50(src='/cdn/dashboard/dist/img/default-150x150.png' alt='Product Image')
+                    .product-info
+                      a.product-title(href='javascript:void(0)')
+                        | PlayStation 4
+                        span.badge.badge-success.float-right $399
+                      span.product-description
+                        | PlayStation 4 500GB Console (PS4)
+                  // /.item
+              // /.card-body
+              .card-footer.text-center
+                a.uppercase(href='javascript:void(0)') View All Products
+              // /.card-footer
+            // /.card
+          // /.col
+        // /.row
+      // /. container-fluid
+    // /.content
+ 
+  include template/footer.pug
+include template/scripts.pug
