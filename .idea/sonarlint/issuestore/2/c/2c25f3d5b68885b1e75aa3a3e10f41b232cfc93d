@@ -1,12 +1,9 @@
 
-|javascript:S3776 "TRefactor this function to reduce its Cognitive Complexity from 90 to the 15 allowed.(Ûš·çúÿÿÿÿ8ŞäÛëÜ1
-_javascript:S1481'"7Remove the declaration of the unused 'esLint' variable.(œÏËÿÿÿÿÿ8ßäÛëÜ1
-\javascript:S1854'"4Remove this useless assignment to variable "esLint".(œÏËÿÿÿÿÿ8ßäÛëÜ1
-‰javascript:S2703I"aAdd the "let", "const" or "var" keyword to this declaration of "description" to make it explicit.(â£’åüÿÿÿÿ8ßäÛëÜ1
-jjavascript:S6551…"A'ExResponse' will evaluate to '[object Object]' when stringified.(¯ûõüûÿÿÿÿ8ßäÛëÜ1
-bjavascript:S6644«">Unnecessary use of boolean literals in conditional expression.(øç€Ó8ßäÛëÜ1
-ajavascript:S6644°">Unnecessary use of boolean literals in conditional expression.(ÖâëZ8ßäÛëÜ1
-jjavascript:S6551ö"A'ExResponse' will evaluate to '[object Object]' when stringified.(¯ûõüûÿÿÿÿ8ßäÛëÜ1
-bjavascript:S6644Œ">Unnecessary use of boolean literals in conditional expression.(øç€Ó8ßäÛëÜ1
-ajavascript:S6644">Unnecessary use of boolean literals in conditional expression.(ÖâëZ8àäÛëÜ1
-]javascript:S1135¥"4Complete the task associated to this "TODO" comment.(Ÿµõÿşÿÿÿÿ8àäÛëÜ1
+|javascript:S3776 "TRefactor this function to reduce its Cognitive Complexity from 90 to the 15 allowed.(Ûš·çúÿÿÿÿ8·¤ÙŞ1
+‰javascript:S2703I"aAdd the "let", "const" or "var" keyword to this declaration of "description" to make it explicit.(â£’åüÿÿÿÿ8¸¤ÙŞ1
+jjavascript:S6551…"A'ExResponse' will evaluate to '[object Object]' when stringified.(¯ûõüûÿÿÿÿ8¸¤ÙŞ1
+bjavascript:S6644«">Unnecessary use of boolean literals in conditional expression.(øç€Ó8½¤ÙŞ1
+ajavascript:S6644°">Unnecessary use of boolean literals in conditional expression.(ÖâëZ8¾¤ÙŞ1
+jjavascript:S6551ö"A'ExResponse' will evaluate to '[object Object]' when stringified.(¯ûõüûÿÿÿÿ8¾¤ÙŞ1
+bjavascript:S6644Œ">Unnecessary use of boolean literals in conditional expression.(øç€Ó8¿¤ÙŞ1
+ajavascript:S6644">Unnecessary use of boolean literals in conditional expression.(ÖâëZ8¿¤ÙŞ1

@@ -1,0 +1,74 @@
+{
+  "version": "1.0.0",
+  "match": {
+    "variable": "{{_X_}}",
+    "function": "{$_X_$}",
+    "files": "___X___"
+  },
+  "support_files": [
+    "js",
+    "example",
+    "json",
+    "html",
+    "pug",
+    "ts",
+    "tsx",
+    "htm",
+    "xml",
+    "txt",
+    "py",
+    "php",
+    "vue",
+    "vuex",
+    "ng",
+    "md",
+    "yaml",
+    "lua"
+  ],
+  "name": "nucleus_MVC_noSQL",
+  "description": "A complete implementation of MVC structured project with session control and control panel in NOSQL (mongoDB) database",
+  "functions_file": "functions.js",
+  "structure_folder": "structure",
+  "execFunctions": false,
+  "overwrite": true,
+  "cmd": [
+    "npm i "
+  ],
+  "replacer": [
+    {
+      "type": "v",
+      "name": "name_project",
+      "ask": "What is the name project?",
+      "typeof": "string",
+      "global": true
+    },
+    {
+      "type": "v",
+      "name": "db_connection",
+      "ask": "What is the URI for mongo DB connection?",
+      "typeof": "string",
+      "global": true
+    },
+    {
+      "type": "v",
+      "name": "api_port",
+      "ask": "What is the PORT where your api runs?",
+      "typeof": "string",
+      "global": true
+    },
+    {
+      "type": "v",
+      "name": "jwt_secret",
+      "ask": "What is the Secure password to protect your tokens?",
+      "typeof": "string",
+      "global": true
+    },
+    {
+      "type": "v",
+      "name": "cookie_session_secret",
+      "ask": "What is the Secure password to protect your cookies?",
+      "typeof": "string",
+      "global": true
+    }
+  ]
+}
