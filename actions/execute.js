@@ -7,7 +7,15 @@ const {promisify} = require('util');
 const os = require("os");
 const v = require("voca");
 const moment = require("moment");
+const listProjects = require("./common/listProjects");
 const execAsync = promisify(exec);
+
+let sleepSetTimeout_ctrl;
+
+function sleep(ms) {
+    clearInterval(sleepSetTimeout_ctrl);
+    return new Promise(resolve => sleepSetTimeout_ctrl = setTimeout(resolve, ms));
+}
 
 let getThree = function (src, three) {
     if (!three) {
@@ -22,7 +30,8 @@ let getThree = function (src, three) {
         three.push(src);
         let files = fs.readdirSync(src);
         files.forEach(function (childItemName) {
-            three = [...three, ...getThree(path.join(src, childItemName))];
+            let childItemPath = path.join(src, childItemName);
+            getThree(childItemPath, three); // Recursivamente llamamos la función para cada elemento en el directorio
         });
     } else {
         three.push(src);
@@ -57,6 +66,12 @@ module.exports = async function ({name}) {
 
     let plantillasPath = configJson.template_folder
 
+
+    let table = listProjects()
+    l('********   My Templates  **********')
+    console.table(table)
+
+
     if (!name) {
         name = questionAsync('Give me the template name: ')
     } else {
@@ -65,11 +80,11 @@ module.exports = async function ({name}) {
 
     l('Welcome searching template... \t')
 
-    name = v.snakeCase(name)
+    name = name.replaceAll(' ', '_')
 
     let pathTemplate = path.join(plantillasPath, name)
     if (!fs.existsSync(pathTemplate)) {
-        l('We can not find template, be sure template exists  \t')
+        l('We can not find template, be sure template exists, ' + path.join(plantillasPath, name) + '  \t')
         return
     }
 
@@ -197,15 +212,16 @@ module.exports = async function ({name}) {
     console.log('source', source)
 
     l('Reading source three')
-
+    await sleep(1000)
     let three = getThree(source)
 
-    console.log(three)
 
     l('Starting  proccess ' + three.length + ' files..')
+    await sleep(1000)
 
     for (let item of three) {
         l('File ' + item)
+        await sleep(30)
 
         let newPath = item.replaceAll(source, destination)
 
@@ -374,6 +390,9 @@ module.exports = async function ({name}) {
                         console.log('overwited')
                         fs.copyFileSync(item, newPath);
                     }
+                } else {
+                    console.log('copied')
+                    fs.copyFileSync(item, newPath);
                 }
             }
         }

@@ -7,6 +7,7 @@ const {promisify} = require('util');
 const os = require("os");
 const v = require("voca");
 const moment = require("moment");
+const listProjects = require("./common/listProjects");
 const execAsync = promisify(exec);
 
 
@@ -292,6 +293,10 @@ module.exports = async function ({name}) {
 
     fs.copyFileSync(path.resolve(packageJson), path.join(dir, 'package.json'));
     l('\t Template ' + configJson.name + ' created correctly \t')
+
+    let table = listProjects()
+    l('********   My Templates  **********')
+    console.table(table)
 
 }
 

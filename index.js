@@ -7,6 +7,7 @@ const execute = require('./actions/execute')
 const make = require('./actions/make')
 const publish = require('./actions/publish')
 const use = require('./actions/use')
+const list = require('./actions/list')
 
 
 program
@@ -16,6 +17,11 @@ program
     .option('-l, --login <login...>', 'Verify and store credentials to ')
     .option('-f, --files <files...>', 'Adds support files to config. Default  "js","html","pug","ts","tsx","htm","xml","txt","py","php","vue","vuex","ng","md","yaml","lua"')
     .action(configure)
+
+program
+    .command('list')
+    .description('list all local templates')
+    .action(list)
 
 program
     .command('make')

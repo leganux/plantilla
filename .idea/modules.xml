@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../nucleus_starter_templates/.idea/nucleus_starter_templates.iml" filepath="$PROJECT_DIR$/../nucleus_starter_templates/.idea/nucleus_starter_templates.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/plantilla.iml" filepath="$PROJECT_DIR$/.idea/plantilla.iml" />
     </modules>
   </component>
