@@ -56,7 +56,7 @@ module.exports = async function ({name}) {
 
     l('Welcome we gonna execute template... \t')
 
-    let configFile = path.join(userHomeDir, '.plantillajs', 'config.js')
+    let configFile = path.join(userHomeDir, '.nucleusjs', 'config.js')
     if (!fs.existsSync(configFile)) {
         l('We can not find config file, please execute "configure" comand please  \t')
         return
@@ -64,7 +64,7 @@ module.exports = async function ({name}) {
     let configJson = fs.readFileSync(configFile, {encoding: 'utf8', flag: 'r'})
     configJson = JSON.parse(configJson)
 
-    let plantillasPath = configJson.template_folder
+    let nucleussPath = configJson.template_folder
 
 
     let table = listProjects()
@@ -82,13 +82,13 @@ module.exports = async function ({name}) {
 
     name = name.replaceAll(' ', '_')
 
-    let pathTemplate = path.join(plantillasPath, name)
+    let pathTemplate = path.join(nucleussPath, name)
     if (!fs.existsSync(pathTemplate)) {
-        l('We can not find template, be sure template exists, ' + path.join(plantillasPath, name) + '  \t')
+        l('We can not find template, be sure template exists, ' + path.join(nucleussPath, name) + '  \t')
         return
     }
 
-    let pathTemplateConfig = path.join(plantillasPath, name, 'config.json')
+    let pathTemplateConfig = path.join(nucleussPath, name, 'config.json')
 
     if (!fs.existsSync(pathTemplateConfig)) {
         l('We can not find template config json, be sure template exists  \t')
@@ -100,16 +100,16 @@ module.exports = async function ({name}) {
     let conf = fs.readFileSync(pathTemplateConfig, {encoding: 'utf8', flag: 'r'})
 
     conf = JSON.parse(conf)
-    let pathFunctions = path.join(plantillasPath, name, conf.functions_file)
+    let pathFunctions = path.join(nucleussPath, name, conf.functions_file)
     let exec_functions = require(pathFunctions)
-    let source = path.join(plantillasPath, name, 'structure')
+    let source = path.join(nucleussPath, name, 'structure')
     let destination = actualPath
     let supportedFiles = conf.support_files
     let overwrite = conf.overwrite
     let cmd = conf.cmd
 
     try {
-        process.chdir(path.join(plantillasPath, name));
+        process.chdir(path.join(nucleussPath, name));
         const {stdout, stderr} = await execAsync('npm i');
         console.log('Command executed:');
         console.log('stdout:', stdout);

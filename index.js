@@ -12,7 +12,7 @@ const list = require('./actions/list')
 
 program
     .command('configure')
-    .description('Create or update the config file for plantilla engine')
+    .description('Create or update the config file for nucleus engine')
     .option('-d, --dir <dir...>', 'Default directory to store local templates')
     .option('-l, --login <login...>', 'Verify and store credentials to ')
     .option('-f, --files <files...>', 'Adds support files to config. Default  "js","html","pug","ts","tsx","htm","xml","txt","py","php","vue","vuex","ng","md","yaml","lua"')
@@ -25,13 +25,13 @@ program
 
 program
     .command('make')
-    .description('Create a new plantilla')
+    .description('Create a new nucleus')
     .option('-n, --name <name...>', 'The name for template')
     .action(make)
 
 program
     .command('execute')
-    .description('Execute plantilla in current directory')
+    .description('Execute nucleus in current directory')
     .option('-n, --name <name...>', 'The name for template')
     .action(execute)
 

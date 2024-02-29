@@ -23,7 +23,7 @@ module.exports = function () {
 
     l('Welcome we gonna execute template... \t')
 
-    let configFile = path.join(userHomeDir, '.plantillajs', 'config.js')
+    let configFile = path.join(userHomeDir, '.nucleusjs', 'config.js')
     if (!fs.existsSync(configFile)) {
         l('We can not find config file, please execute "configure" comand please  \t')
         return
@@ -31,13 +31,13 @@ module.exports = function () {
     let configJson = fs.readFileSync(configFile, {encoding: 'utf8', flag: 'r'})
     configJson = JSON.parse(configJson)
 
-    let plantillasPath = configJson.template_folder
-    const directories = getDirectories(path.join(plantillasPath))
+    let nucleussPath = configJson.template_folder
+    const directories = getDirectories(path.join(nucleussPath))
 
     let table = []
     for (let item of directories) {
-        let pathFull = path.join(plantillasPath, item)
-        let pathFull_json = path.join(plantillasPath, item, 'config.json')
+        let pathFull = path.join(nucleussPath, item)
+        let pathFull_json = path.join(nucleussPath, item, 'config.json')
         if (fs.existsSync(pathFull) && fs.existsSync(pathFull_json)) {
             let innerConfig = fs.readFileSync(pathFull_json, {encoding: 'utf8', flag: 'r'})
             innerConfig = JSON.parse(innerConfig)

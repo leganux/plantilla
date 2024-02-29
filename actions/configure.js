@@ -41,15 +41,15 @@ function getDirectories(dirPath) {
 }
 
 module.exports = async function ({dir, login, files}) {
-    l('Welcome now we gonna configure plantilla engine... \t')
+    l('Welcome now we gonna configure nucleus engine... \t')
 
     const userHomeDir = os.homedir();
 
-    let fullpath = path.join(userHomeDir, 'plantilla')
-    let configFile = path.join(userHomeDir, '.plantillajs', 'config.js')
-    let packageJson = path.join(userHomeDir, '.plantillajs', 'package.json')
+    let fullpath = path.join(userHomeDir, 'nucleus')
+    let configFile = path.join(userHomeDir, '.nucleusjs', 'config.js')
+    let packageJson = path.join(userHomeDir, '.nucleusjs', 'package.json')
 
-    let configFolder = path.join(userHomeDir, '.plantillajs')
+    let configFolder = path.join(userHomeDir, '.nucleusjs')
 
     if (!fs.existsSync(configFolder)) {
         await makeDir(configFolder)

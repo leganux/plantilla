@@ -36,8 +36,8 @@ module.exports = async function ({name}) {
     const userHomeDir = os.homedir();
 
 
-    let configFile = path.join(userHomeDir, '.plantillajs', 'config.js')
-    let packageJson = path.join(userHomeDir, '.plantillajs', 'package.json')
+    let configFile = path.join(userHomeDir, '.nucleusjs', 'config.js')
+    let packageJson = path.join(userHomeDir, '.nucleusjs', 'package.json')
 
 
     if (!fs.existsSync(configFile)) {
@@ -104,7 +104,7 @@ module.exports = async function ({name}) {
         a replacer could be 
             Global: Only will be requested once at start running template or
             Local: Will be requested in every appearance     
-        for filenames pattern plantilla.js will use variable names    
+        for filenames pattern nucleus.js will use variable names    
             
     `)
     let rpl = questionAsync('Do you want to add a replacer (N)/Y: ')

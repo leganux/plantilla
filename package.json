@@ -1,5 +1,5 @@
 {
-  "name": "plantilla",
+  "name": "nucleus",
   "version": "1.0.0",
   "description": "Avoid bolerplate creating and sharing your own templates and rules with this tool",
   "main": "index.js",
@@ -10,7 +10,7 @@
   },
   "keywords": [
     "template",
-    "plantilla",
+    "nucleus",
     "nature",
     "boilerplate",
     "avoid",
@@ -36,7 +36,7 @@
     "voca": "^1.4.1"
   },
   "bin": {
-    "plantilla": "./index.js"
+    "nucleus": "./index.js"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
